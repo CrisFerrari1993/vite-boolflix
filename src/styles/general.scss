@@ -1,6 +1,6 @@
 // @use import
 @import 'node_modules/bootstrap/scss/bootstrap';
-@import '@fontsource-variables/monteserrat';
+@import 'node_modules/@fontsource/montserrat/index.css';
 
 // General page rules
 * {
@@ -10,7 +10,7 @@
 }
 
 body {
-    font-family: 'Montserrat Variables', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 a {
