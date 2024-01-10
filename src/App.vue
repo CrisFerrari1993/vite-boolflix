@@ -1,18 +1,13 @@
 <script>
-// axios including
-import axios from 'axios';
-
-//children components including
-import AppHeader from './components/appHeader.vue';
-import MovieList from './components/MovieList.vue';
-
-//store including\
-import { store } from './store';
+import { store } from "./store.js";
+import axios from "axios";
+import AppHeader from './components/AppHeader.vue';
+import AppMain from './components/AppMain.vue';
 
 export default {
   components: {
     AppHeader,
-    MovieList,
+    AppMain
   },
   data() {
     return {
@@ -20,31 +15,44 @@ export default {
     }
   },
   methods: {
-    getFilms() {
-      axios
-        .get(store.apiUrl)
-        .then((res => {
-          console.log(res.data.results);
-          store.filmList = res.data.results;
-        }))
-        .catch((err) => {
-          console.log("Errori", err);
+    getMovies() {
+      axios.get(store.apiSearchMovieURL + store.searchText)
+        .then(res => {
+          store.movieList = res.data.results;
+          console.log(store.movieList);
+          console.log(store.searchText);
         })
+        .catch(err => {
+          console.log(err);
+        }),
+        axios.get(store.apiSearchTvURL + store.searchText)
+          .then(res => {
+            store.tvList = res.data.results;
+            console.log(store.tvList);
+          })
+          .catch(err => {
+            console.log(err);
+          })
+
+      store.searchText = '';
     }
   },
-  created() {
-    this.getFilms();
-  }
 }
 </script>
 
 <template>
-  <AppHeader />
-  <main>
-    <MovieList />
-  </main>
+  <div id="wrapper">
+    <AppHeader @search="getMovies" />
+    <AppMain />
+  </div>
 </template>
 
 <style lang="scss">
-@use './styles/general.scss'
+@use './styles/general.scss';
+@use './styles/partials/mixins.scss';
+
+#wrapper {
+  height: 100vh;
+  width: 100vw;
+}
 </style>
