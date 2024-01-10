@@ -1,8 +1,7 @@
-// @use import
-@import 'node_modules/bootstrap/scss/bootstrap';
-@import 'node_modules/@fontsource/montserrat/index.css';
+@use './partials/variables' as *;
+@use './partials/mixins' as *;
 
-// General page rules
+
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +9,12 @@
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
+}
+
+img {
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 a {
@@ -24,4 +28,13 @@ ul {
 
 input {
     outline: none;
+}
+
+//UTILITIES
+.container {
+    height: 100%;
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
 }
